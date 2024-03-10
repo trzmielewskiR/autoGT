@@ -1,28 +1,42 @@
 import pygame
-pygame.init()
 
-pygame.display.set_caption("autoGT")
+from map import preparedMap
+from agent import Agent
 
-screen = pygame.display.set_mode(size=(512,512))
-screen.fill(pygame.Color('#ffffff'))
+#config
+SCREEN_SIZE: tuple[int, int] = (512, 512)
+BACKGROUND_COLOR: pygame.Color = pygame.Color('#ffffff')
 
-tileImage = pygame.image.load('tile1.png')
-surface_size = width, height = (512, 512)
-surface = pygame.Surface(surface_size)
+if __name__ == '__main__':
 
-for x in range(0, width, 16):
-    for y in range(0, height, 16):
-        surface.blit(tileImage, (x, y))
+    pygame.init()
 
-screen.blit(surface, (0, 0))
+    pygame.display.set_caption("autoGT")
 
-pygame.display.update()
+    screen = pygame.display.set_mode(size=SCREEN_SIZE)
+    screen.fill(pygame.Color(BACKGROUND_COLOR))
 
-running = True
+    map = preparedMap(SCREEN_SIZE)
+    
+    screen.blit(map, (0, 0))
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    agent = Agent()
+    agent_list = pygame.sprite.Group()
+    agent_list.add(agent)
+    agent_list.draw(screen)
 
-pygame.quit()
+    pygame.display.update()
+
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+    pygame.quit()
+
+
+def AutoGtGame():
+    def __init__(self):
+        pass

@@ -36,7 +36,7 @@ def main():
     game = AutoGtGame()
     game.update_window()
 
-    agent = Agent(16, 16, "resources\\textures\\trashmaster_blu.png")
+    agent = Agent(16, 16, "resources\\textures\\garbagetruck\\trashmaster_blu.png")
     game.draw_GargabeTruck(agent, (0, 0))
 
     game.update_window()

@@ -2,6 +2,7 @@ import pygame
 
 from map import preparedMap
 from agent import Agent
+from house import House
 
 
 class AutoGtGame():
@@ -21,10 +22,10 @@ class AutoGtGame():
     def update_window(self):
         pygame.display.update()
 
-
-    def draw_GargabeTruck(self, agent: Agent, position: tuple[int, int]):
-        # pos -> (x, y)
-        self.screen.blit(agent.image, position)
+    
+    def draw_object(self, drawable_object, position: tuple[int, int]):
+        # drawable object must have .image field inside class
+        self.screen.blit(drawable_object.image, position)
 
 
     def reload_map(self):
@@ -36,8 +37,11 @@ def main():
     game = AutoGtGame()
     game.update_window()
 
+    house = House(20, 20)
     agent = Agent(16, 16, "resources\\textures\\garbagetruck\\trashmaster_blu.png")
-    game.draw_GargabeTruck(agent, (0, 0))
+    game.draw_object(agent, (0, 0))
+    game.draw_object(house, (20, 20))
+    
 
     game.update_window()
 
@@ -49,9 +53,8 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 game.reload_map()
-                game.draw_GargabeTruck(
-                    agent,
-                    agent.move(event.key, 16))
+                game.draw_object(agent, agent.move(event.key, 16))
+                game.draw_object(house, (20, 20))
                 game.update_window()
 
     pygame.quit()
